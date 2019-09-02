@@ -1,0 +1,96 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+ 
+ 
+<body>
+ 
+ 
+ <div class="topnav">
+  <a class="active" href="/">Template Design</a>
+  <a href="/">Specific Design</a>
+
+</div> 
+
+
+      
+<h2>Welcome to Predictive Mainteanace Interface Designer</h2>
+
+ <h3>TempSensor Record</h3>
+<table border = 1>
+         {% for key, value in var['data'].iterrows(): %}
+            <tr>
+               <td> {{ value.tempsensor_id }} </td>
+               <td> {{ value.tempsensor_name}} </td>
+               <td> {{ value.tempsensor_desc}} </td>
+               <td>  <form action = "{{var['url']}}tempsensor_del" method = "POST">
+                    <input name="tempsensor_id" type="hidden"  value = {{value.tempsensor_id}} />
+                    <input name="tempequipment_id" type="hidden"  value = {{var['parent']}} />
+                      <input type="submit" value ="Delete">
+                    </form> </td>
+            </tr>
+         {% endfor %}
+      </table>
+      
+      
+      
+ <h3>Add TempSensor&nbsp;</h3>
+<p>Sensor name:</p>     
+ <form action = "{{var['url']}}tempsensor_add" method = "POST">
+ <input name="tempequipment_id" type="hidden"  value = {{var['parent']}} />
+<p><input name="sensor_name" type="text" /></p>
+	<p>Equipment description:</p>
+  <textarea name="sensor_des" rows="10" cols="30">The cat was playing in the garden.</textarea>
+  <br>
+  <input type="submit" value ="Create">
+</form>
+
+
+
+
+
+</body>
+</html>
