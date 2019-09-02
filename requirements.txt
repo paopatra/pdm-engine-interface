@@ -1,1 +1,1 @@
-sudo pip install pyodbc
+pyodbc=4.0.27 
