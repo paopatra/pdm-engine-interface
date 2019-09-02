@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+ 
+ 
+<body>
+ 
+ 
+ <div class="topnav">
+  <a class="active" href="/">Template Design</a>
+  <a href="/">Specific Design</a>
+
+</div> 
+
+
+      
+<h2>Welcome to Predictive Mainteanace Interface Designer</h2>
+
+ <h3>TempFailure Record</h3>
+<table border = 1>
+         {% for key, value in var['data'].iterrows(): %}
+            <tr>
+               <td> {{ value.tempfailure_id }} </td>
+               <td> {{ value.tempfailure_name}} </td>
+               <td>  <form action = "{{var['url']}}tempfailure_del" method = "POST">
+                    <input name="tempfailure_id" type="hidden"  value = {{value.tempfailure_id}} />
+                    <input name="tempequipment_id" type="hidden"  value = {{var['parent']}} />
+                      <input type="submit" value ="Delete">
+                    </form> </td>
+            </tr>
+         {% endfor %}
+      </table>
+      
+      
+      
+ <h3>Add TempFailure&nbsp;</h3>
+<p>Failure name:</p>     
+ <form action = "{{var['url']}}tempfailure_add" method = "POST">
+ <input name="tempequipment_id" type="hidden"  value = {{var['parent']}} />
+<p><input name="failure_name" type="text" /></p>
+  <input type="submit" value ="Create">
+</form>
+
+
+
+
+
+</body>
+</html>
