@@ -1,1 +1,1 @@
-pip install --user pyodbc
+sudo pip install pyodbc
